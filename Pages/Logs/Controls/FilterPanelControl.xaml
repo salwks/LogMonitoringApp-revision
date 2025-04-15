@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="LogMonitoringApp.Pages.Logs.Controls.FilterPanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="Auto">
+    <StackPanel Orientation="Vertical" Margin="20">
+        <!-- 1. 로그 검색 -->
+        <Grid Margin="0,0,0,30">
+            <TextBox Height="36" Style="{StaticResource SearchBoxStyle}" />
+            <TextBlock Text="🔍" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- 2. 기간 타이틀 -->
+        <TextBlock Text="기간" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+
+        <!-- 3. 날짜 선택 (DatePicker 입력 상자, 시작일 - 종료일) -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10" VerticalAlignment="Center">
+            <DatePicker Height="34" Width="120" Style="{StaticResource CustomDatePickerStyle}" Text="2024/12/04" />
+            <TextBlock Text=" - " VerticalAlignment="Center" Margin="5,0"/>
+            <DatePicker Height="34" Width="120" Style="{StaticResource CustomDatePickerStyle}" Text="2024/12/10" />
+        </StackPanel>
+
+        <!-- 4. 기간 선택 라디오 버튼 (오늘, 지난 7일, 지난 30일, 맞춤) -->
+        <StackPanel Orientation="Vertical" Margin="0,0,0,30">
+            <RadioButton Content="오늘" GroupName="DateRange" Margin="0,0,0,10" Style="{StaticResource CustomRadioButtonStyle}"/>
+            <RadioButton Content="지난 7일" GroupName="DateRange" Margin="0,0,0,10" Style="{StaticResource CustomRadioButtonStyle}" IsChecked="True"/>
+            <RadioButton Content="지난 30일" GroupName="DateRange" Margin="0,0,0,10" Style="{StaticResource CustomRadioButtonStyle}"/>
+            <RadioButton Content="맞춤" GroupName="DateRange" Style="{StaticResource CustomRadioButtonStyle}"/>
+        </StackPanel>
+
+        <!-- 5. 사용자 타이틀 -->
+        <TextBlock Text="사용자" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+
+        <!-- 6. 사용자 선택 (ComboBox) -->
+        <ComboBox Height="36" Margin="0,0,0,30" Style="{StaticResource CustomComboBoxStyle}">
+            <ComboBoxItem Content="전체" IsSelected="True"/>
+            <ComboBoxItem Content="홍길동"/>
+            <ComboBoxItem Content="김철수"/>
+            <ComboBoxItem Content="이영희"/>
+        </ComboBox>
+
+        <!-- 7. 로그 구분 타이틀 -->
+        <TextBlock Text="로그 구분" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+
+        <!-- 8. 로그 구분 체크박스 (시스템, 사용자, 네트워크, 보안) -->
+        <StackPanel Orientation="Vertical" Margin="0,0,0,30">
+            <CheckBox Content="시스템" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+            <CheckBox Content="사용자" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+            <CheckBox Content="네트워크" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+            <CheckBox Content="보안" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+        </StackPanel>
+
+        <!-- 9. 심각도 타이틀 -->
+        <TextBlock Text="심각도" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+
+        <!-- 10. 심각도 체크박스 (에러, 경고, 성공, 정보) -->
+        <StackPanel Orientation="Vertical">
+            <Grid Margin="0,0,0,10">
+                <CheckBox Content="에러" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+                <ContentControl ContentTemplate="{StaticResource ErrorIconTemplate}" HorizontalAlignment="Right" Width="20" Height="20"/>
+            </Grid>
+            <Grid Margin="0,0,0,10">
+                <CheckBox Content="경고" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+                <ContentControl ContentTemplate="{StaticResource WarningIconTemplate}" HorizontalAlignment="Right" Width="20" Height="20"/>
+            </Grid>
+            <Grid Margin="0,0,0,10">
+                <CheckBox Content="성공" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+                <ContentControl ContentTemplate="{StaticResource SuccessIconTemplate}" HorizontalAlignment="Right" Width="20" Height="20"/>
+            </Grid>
+            <Grid>
+                <CheckBox Content="정보" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+                <ContentControl ContentTemplate="{StaticResource InfoIconTemplate}" HorizontalAlignment="Right" Width="20" Height="20"/>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
