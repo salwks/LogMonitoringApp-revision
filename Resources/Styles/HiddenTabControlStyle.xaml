@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- TabControl 헤더 숨김 스타일 -->
+    <Style x:Key="HiddenTabControlStyle" TargetType="TabControl">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <!-- 헤더 영역을 숨김 -->
+                            <RowDefinition Height="*"/>
+                            <!-- 탭 항목 영역 -->
+                        </Grid.RowDefinitions>
+
+                        <!-- 헤더 영역 (숨김) -->
+                        <TabPanel x:Name="HeaderPanel" Grid.Row="0" 
+                                IsItemsHost="True" Visibility="Collapsed" />
+
+                        <!-- 탭 항목 영역 -->
+                        <Border Grid.Row="1" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter x:Name="PART_SelectedContentHost" 
+                                          ContentSource="SelectedContent"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

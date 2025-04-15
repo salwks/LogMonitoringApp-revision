@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- DatePicker의 전체 ControlTemplate 정의 -->
+    <Style x:Key="CustomDatePickerStyle" TargetType="DatePicker">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderBrush" Value="#EAEAEA"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- DatePicker 텍스트박스 부분 (날짜를 표시) -->
+                        <DatePickerTextBox x:Name="PART_TextBox"
+                               Grid.Column="0"
+                               Background="{TemplateBinding Background}"
+                               Foreground="{TemplateBinding Foreground}"
+                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                               BorderThickness="0"
+                               Padding="2"/>
+                        <!-- 달력 버튼 부분 -->
+                        <Button x:Name="PART_Button"
+                    Grid.Column="1"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Padding="2"
+                    Width="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                            <!-- 버튼 아이콘: 간단한 화살표 아래 모양 -->
+                            <Path Data="M 0,0 L 8,0 L 4,4 Z" Fill="Black" Stretch="Uniform"/>
+                        </Button>
+                        <!-- 달력 팝업 -->
+                        <Popup x:Name="PART_Popup"
+                   Placement="Bottom"
+                   AllowsTransparency="True"
+                   Focusable="False"
+                   StaysOpen="False">
+                            <Border Background="White" 
+                      BorderBrush="{TemplateBinding BorderBrush}" 
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      CornerRadius="8"
+                      Padding="5">
+                                <!-- Calendar 컨트롤은 기본 PART_Calendar를 사용 -->
+                                <Calendar x:Name="PART_Calendar" 
+                          Background="White" 
+                          BorderThickness="0" 
+                          DisplayMode="Month"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- PART_Button 클릭 시 Popup 열기 -->
+                        <Trigger SourceName="PART_Button" Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_Popup" Property="IsOpen" Value="True"/>
+                        </Trigger>
+                        <!-- DatePicker의 IsDropDownOpen과 연동 -->
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter TargetName="PART_Popup" Property="IsOpen" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="False">
+                            <Setter TargetName="PART_Popup" Property="IsOpen" Value="False"/>
+                        </Trigger>
+                        <!-- DatePicker가 Disabled 상태일 때 -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_TextBox" Property="Foreground" Value="#8C9196"/>
+                            <Setter TargetName="PART_Button" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

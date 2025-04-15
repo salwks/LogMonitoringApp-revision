@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="LogMonitoringApp.Shell.AppShell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:nav="clr-namespace:LogMonitoringApp.Shell.Navigation"
+             xmlns:dashboard="clr-namespace:LogMonitoringApp.Pages.Dashboard"
+             xmlns:logs="clr-namespace:LogMonitoringApp.Pages.Logs"
+             xmlns:statistics="clr-namespace:LogMonitoringApp.Pages.Statistics"
+             xmlns:audit="clr-namespace:LogMonitoringApp.Pages.Audit"
+             xmlns:status="clr-namespace:LogMonitoringApp.Shell.StatusBar"
+             Height="Auto" Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/HiddenTabControlStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <!-- TopNavBar 영역 -->
+            <RowDefinition Height="*"/>
+            <!-- TabControl 콘텐츠 영역 -->
+            <RowDefinition Height="30"/>
+            <!-- 상태 표시줄 영역 -->
+        </Grid.RowDefinitions>
+
+        <!-- TopNavBar -->
+        <nav:TopNavBar x:Name="TopNavBarControl" Grid.Row="0"/>
+
+        <!-- TabControl (헤더 숨김) -->
+        <TabControl Grid.Row="1" x:Name="MainTabControl" 
+                    Style="{DynamicResource HiddenTabControlStyle}" 
+                    Background="Transparent" 
+                    BorderThickness="0">
+            <TabItem>
+                <Frame NavigationUIVisibility="Hidden" Background="Transparent"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Frame.Content>
+                        <dashboard:DashboardPage />
+                    </Frame.Content>
+                </Frame>
+            </TabItem>
+            <TabItem IsSelected="True">
+                <Frame NavigationUIVisibility="Hidden" Background="Transparent"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Frame.Content>
+                        <logs:LogsPage />
+                    </Frame.Content>
+                </Frame>
+            </TabItem>
+            <TabItem>
+                <Frame NavigationUIVisibility="Hidden" Background="Transparent"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Frame.Content>
+                        <statistics:StatisticsPage />
+                    </Frame.Content>
+                </Frame>
+            </TabItem>
+            <TabItem>
+                <Frame NavigationUIVisibility="Hidden" Background="Transparent"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Frame.Content>
+                        <audit:AuditPage />
+                    </Frame.Content>
+                </Frame>
+            </TabItem>
+        </TabControl>
+
+        <!-- 상태 표시줄 -->
+        <status:StatusBarControl Grid.Row="2"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,11 @@
+﻿<Page x:Class="LogMonitoringApp.Pages.Statistics.StatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="StatisticsPage">
+    <Grid Background="White">
+        <TextBlock Text="Statistics Content" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               FontSize="20"/>
+    </Grid>
+</Page>

@@ -1,0 +1,85 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 기본 버튼 템플릿 -->
+    <ControlTemplate x:Key="DefaultButtonTemplate" TargetType="Button">
+        <Border Background="{TemplateBinding Background}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="3">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.9"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- 아웃라인 버튼 템플릿 -->
+    <ControlTemplate x:Key="OutlineButtonTemplate" TargetType="Button">
+        <Border Background="{TemplateBinding Background}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="3">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource HoverBackgroundBrush}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- 탭 라디오버튼 템플릿 -->
+    <ControlTemplate x:Key="TabRadioButtonTemplate" TargetType="RadioButton">
+        <Grid>
+            <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border x:Name="UnderlineBorder" Background="{DynamicResource PrimaryBrush}" 
+                    Height="2" VerticalAlignment="Bottom" Opacity="0"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter TargetName="UnderlineBorder" Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- 심각도 아이콘을 위한 템플릿 -->
+    <DataTemplate x:Key="ErrorIconTemplate">
+        <Grid>
+            <Ellipse Width="20" Height="20" Fill="{DynamicResource ErrorBrush}"/>
+            <TextBlock Text="!" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="WarningIconTemplate">
+        <Grid>
+            <Ellipse Width="20" Height="20" Fill="{DynamicResource WarningBrush}"/>
+            <TextBlock Text="!" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SuccessIconTemplate">
+        <Grid>
+            <Ellipse Width="20" Height="20" Fill="{DynamicResource SuccessBrush}"/>
+            <TextBlock Text="✓" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="InfoIconTemplate">
+        <Grid>
+            <Ellipse Width="20" Height="20" Fill="{DynamicResource InfoBrush}"/>
+            <TextBlock Text="i" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

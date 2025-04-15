@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 탭 전환용 RadioButton 스타일 -->
+    <Style x:Key="TabRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!-- 텍스트 영역 -->
+                            <RowDefinition Height="*"/>
+                            <!-- 밑줄 영역 (기본 Height 2px) -->
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- ContentPresenter: 탭 텍스트를 표시 -->
+                        <ContentPresenter x:Name="ContentPresenter" Grid.Row="0"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <!-- 밑줄: 기본 상태는 숨김 -->
+                        <Border x:Name="Underline" Grid.Row="1" 
+                    Background="Black" Height="2"
+                    HorizontalAlignment="Center" Visibility="Collapsed">
+                            <!-- ContentPresenter의 ActualWidth에 바인딩하여 텍스트의 너비만큼 밑줄이 표시되도록 함 -->
+                            <Border.Width>
+                                <Binding Path="ActualWidth" ElementName="ContentPresenter" />
+                            </Border.Width>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- 선택된 상태(Checked)일 때 밑줄을 Visible로 -->
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Underline" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <!-- 선택되지 않은 상태는 기본적으로 Collapsed -->
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="Underline" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

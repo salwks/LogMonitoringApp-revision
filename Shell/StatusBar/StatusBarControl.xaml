@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="LogMonitoringApp.Shell.StatusBar.StatusBarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="30" Background="#FAFAFA">
+    <Grid Margin="10,0">
+        <TextBlock Text="Status: Ready" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

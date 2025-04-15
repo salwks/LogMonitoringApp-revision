@@ -1,0 +1,13 @@
+﻿<Window x:Class="LogMonitoringApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:LogMonitoringApp.Shell"
+        Title="Log Monitoring App" Height="1080" Width="1920">
+    <Grid>
+        <!-- 메인 콘텐츠 -->
+        <shell:AppShell />
+
+        <!-- 토스트 팝업을 위한 컨테이너 -->
+        <Grid x:Name="ToastContainer" Panel.ZIndex="9999"/>
+    </Grid>
+</Window>
