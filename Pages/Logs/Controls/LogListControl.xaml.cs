@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,13 +13,79 @@ namespace LogMonitoringApp.Pages.Logs.Controls
     {
         public ObservableCollection<LogEntry> LogEntries { get; set; }
         private bool _isUpdatingCheckState = false;
+        private readonly string _jsonFilePath = "Data/SampleLogs.json";
 
         public LogListControl()
         {
             InitializeComponent();
 
+            // ObservableCollection 초기화
+            LogEntries = new ObservableCollection<LogEntry>();
+
+            // JSON 파일에서 데이터 로드
+            LoadLogsFromJson();
+
+            // DataGrid에 데이터 바인딩
+            LogDataGrid.ItemsSource = LogEntries;
+        }
+
+        private void LoadLogsFromJson()
+        {
+            try
+            {
+                // 실행 파일 경로 기준으로 JSON 파일 경로 구성
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string fullPath = Path.Combine(basePath, _jsonFilePath);
+
+                // 파일 존재 확인
+                if (!File.Exists(fullPath))
+                {
+                    MessageBox.Show($"JSON 파일을 찾을 수 없습니다: {_jsonFilePath}", "파일 오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                    LoadSampleData(); // 기본 샘플 데이터 로드
+                    return;
+                }
+
+                // JSON 파일 읽기
+                string jsonContent = File.ReadAllText(fullPath);
+
+                // JSON 파싱 및 LogEntry 객체로 변환
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true // 속성 이름 대소문자 무시
+                };
+
+                var logEntries = JsonSerializer.Deserialize<LogEntry[]>(jsonContent, options);
+
+                if (logEntries == null || logEntries.Length == 0)
+                {
+                    MessageBox.Show("JSON 파일에서 로그 데이터를 로드할 수 없습니다.", "데이터 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    LoadSampleData(); // 기본 샘플 데이터 로드
+                    return;
+                }
+
+                // ObservableCollection에 로그 항목 추가
+                LogEntries.Clear();
+                foreach (var entry in logEntries)
+                {
+                    entry.IsSelected = false; // 기본적으로 체크 해제 상태
+                    entry.PropertyChanged += LogEntry_PropertyChanged; // 이벤트 구독
+                    LogEntries.Add(entry);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"로그 데이터 로드 중 오류 발생: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                LoadSampleData(); // 기본 샘플 데이터 로드
+            }
+        }
+
+        // JSON 로드 실패 시 사용할 기본 샘플 데이터
+        private void LoadSampleData()
+        {
+            LogEntries.Clear();
+
             // 샘플 데이터 생성 (각 로그 구분 타입 2개씩 포함)
-            LogEntries = new ObservableCollection<LogEntry>
+            var sampleEntries = new LogEntry[]
             {
                 // 시스템 로그 2개
                 new LogEntry { IsSelected = false, Timestamp = "12/10 15:18:33", Severity = "정보", LogCategory = "시스템", LogId = "SS150472", Message = "장치를 초기화 하였습니다.", User = "홍길동" },
@@ -32,29 +101,13 @@ namespace LogMonitoringApp.Pages.Logs.Controls
                 
                 // 보안 로그 2개
                 new LogEntry { IsSelected = false, Timestamp = "12/10 14:27:17", Severity = "정보", LogCategory = "보안", LogId = "SA996599", Message = "시스템에 로그인 하였습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 14:18:33", Severity = "정보", LogCategory = "보안", LogId = "SA908689", Message = "전사용 종료되었습니다.", User = "홍길동" },
-                
-                // 추가 로그들
-                new LogEntry { IsSelected = false, Timestamp = "12/10 13:27:17", Severity = "에러", LogCategory = "시스템", LogId = "SS897886", Message = "데이터 베이스 정리에 실패했습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 12:56:48", Severity = "에러", LogCategory = "시스템", LogId = "SH578578", Message = "Filament 전류가 설정보다 낮습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 12:35:21", Severity = "정보", LogCategory = "사용자", LogId = "UE789686", Message = "영상을 확대했습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 12:30:21", Severity = "정보", LogCategory = "사용자", LogId = "UE906769", Message = "비교 영상을 선택했습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 12:18:33", Severity = "성공", LogCategory = "사용자", LogId = "UE706890", Message = "Fluoro 영상을 촬영했습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 11:39:48", Severity = "경고", LogCategory = "시스템", LogId = "SH567988", Message = "Capbank가 충전중입니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 11:33:48", Severity = "에러", LogCategory = "사용자", LogId = "UE956785", Message = "Fluoro 영상 촬영에 실패했습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 11:33:18", Severity = "성공", LogCategory = "시스템", LogId = "SS789680", Message = "파일 시스템을 검사하였습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 11:11:35", Severity = "정보", LogCategory = "사용자", LogId = "UE906599", Message = "DNR 설정을 변경하였습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 10:29:17", Severity = "정보", LogCategory = "네트워크", LogId = "UE808689", Message = "촬영 모드를 Fluoro로 변경하였습니다.", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 10:27:17", Severity = "정보", LogCategory = "보안", LogId = "UE987879", Message = "kV 값을 변경했습니다", User = "홍길동" },
-                new LogEntry { IsSelected = false, Timestamp = "12/10 10:18:33", Severity = "에러", LogCategory = "시스템", LogId = "SH979677", Message = "Detector가 연결되지 않았습니다.", User = "홍길동" }
+                new LogEntry { IsSelected = false, Timestamp = "12/10 14:18:33", Severity = "정보", LogCategory = "보안", LogId = "SA908689", Message = "전사용 종료되었습니다.", User = "홍길동" }
             };
 
-            LogDataGrid.ItemsSource = LogEntries;
-
-            // PropertyChanged 이벤트 구독
-            foreach (var entry in LogEntries)
+            foreach (var entry in sampleEntries)
             {
                 entry.PropertyChanged += LogEntry_PropertyChanged;
+                LogEntries.Add(entry);
             }
         }
 
@@ -95,12 +148,7 @@ namespace LogMonitoringApp.Pages.Logs.Controls
             else
             {
                 bool allChecked = LogEntries.All(entry => entry.IsSelected);
-                bool anyChecked = LogEntries.Any(entry => entry.IsSelected);
-
                 SelectAllCheckBox.IsChecked = allChecked;
-                // 부분 선택 상태를 표시하려면 아래 코드를 활성화
-                // SelectAllCheckBox.IsThreeState = true;
-                // SelectAllCheckBox.IsChecked = allChecked ? true : (anyChecked ? null : false);
             }
 
             _isUpdatingCheckState = false;
