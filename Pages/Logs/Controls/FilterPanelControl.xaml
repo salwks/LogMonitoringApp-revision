@@ -41,12 +41,31 @@
         <!-- 7. 로그 구분 타이틀 -->
         <TextBlock Text="로그 구분" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
 
-        <!-- 8. 로그 구분 체크박스 (시스템, 사용자, 네트워크, 보안) -->
+        <!-- 8. 로그 구분 체크박스 (시스템, 사용자, 네트워크, 보안) - 색상 박스로 표시 -->
         <StackPanel Orientation="Vertical" Margin="0,0,0,30">
-            <CheckBox Content="시스템" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
-            <CheckBox Content="사용자" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
-            <CheckBox Content="네트워크" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
-            <CheckBox Content="보안" Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True"/>
+            <Grid Margin="0,0,0,10">
+                <CheckBox Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True">
+                    <ContentControl ContentTemplate="{StaticResource SystemCategoryTemplate}" />
+                </CheckBox>
+            </Grid>
+
+            <Grid Margin="0,0,0,10">
+                <CheckBox Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True">
+                    <ContentControl ContentTemplate="{StaticResource UserCategoryTemplate}" />
+                </CheckBox>
+            </Grid>
+
+            <Grid Margin="0,0,0,10">
+                <CheckBox Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True">
+                    <ContentControl ContentTemplate="{StaticResource NetworkCategoryTemplate}" />
+                </CheckBox>
+            </Grid>
+
+            <Grid Margin="0,0,0,10">
+                <CheckBox Style="{StaticResource CustomCheckBoxStyle}" IsChecked="True">
+                    <ContentControl ContentTemplate="{StaticResource SecurityCategoryTemplate}" />
+                </CheckBox>
+            </Grid>
         </StackPanel>
 
         <!-- 9. 심각도 타이틀 -->

@@ -12,17 +12,22 @@
               GridLinesVisibility="None"
               Margin="20,0">
             <DataGrid.Columns>
-                <!-- 체크박스 열 -->
+                <!-- 체크박스 열 - 가운데 정렬 및 이벤트 추가 -->
                 <DataGridTemplateColumn Width="40">
                     <DataGridTemplateColumn.Header>
-                        <CheckBox x:Name="SelectAllCheckBox" Click="SelectAllCheckBox_Click"/>
+                        <CheckBox x:Name="SelectAllCheckBox" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"
+                               Click="SelectAllCheckBox_Click"/>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Grid VerticalAlignment="Center">
-                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" 
-                          HorizontalAlignment="Center" 
-                          VerticalAlignment="Center"/>
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      Checked="ItemCheckBox_CheckedChanged"
+                                      Unchecked="ItemCheckBox_CheckedChanged"
+                                      VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -62,9 +67,35 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <!-- 로그 구분 -->
-                <DataGridTextColumn Header="로그 구분" Binding="{Binding LogCategory}" Width="100"
-                            ElementStyle="{StaticResource DataGridCenterCellStyle}"/>
+                <!-- 로그 구분 (템플릿 열로 변경하여 색상 박스 추가) -->
+                <DataGridTemplateColumn Header="로그 구분" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentControl>
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LogCategory}" Value="시스템">
+                                                    <Setter Property="ContentTemplate" Value="{StaticResource SystemCategoryTemplate}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LogCategory}" Value="사용자">
+                                                    <Setter Property="ContentTemplate" Value="{StaticResource UserCategoryTemplate}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LogCategory}" Value="네트워크">
+                                                    <Setter Property="ContentTemplate" Value="{StaticResource NetworkCategoryTemplate}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LogCategory}" Value="보안">
+                                                    <Setter Property="ContentTemplate" Value="{StaticResource SecurityCategoryTemplate}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
                 <!-- 로그 아이디 -->
                 <DataGridTextColumn Header="로그 아이디" Binding="{Binding LogId}" Width="130"

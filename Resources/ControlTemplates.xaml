@@ -1,20 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- 기본 버튼 템플릿 -->
-    <ControlTemplate x:Key="DefaultButtonTemplate" TargetType="Button">
-        <Border Background="{TemplateBinding Background}" 
-                BorderBrush="{TemplateBinding BorderBrush}" 
-                BorderThickness="{TemplateBinding BorderThickness}"
-                CornerRadius="3">
-            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value="0.9"/>
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
 
     <!-- 아웃라인 버튼 템플릿 -->
     <ControlTemplate x:Key="OutlineButtonTemplate" TargetType="Button">
@@ -31,30 +16,74 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    
+    <!-- 로그 구분 스타일을 위한 템플릿 - 정확한 색상과 불투명도 지정 -->
+    <DataTemplate x:Key="SystemCategoryTemplate">
+        <Border CornerRadius="5" Padding="10,2">
+            <Border.Background>
+                <SolidColorBrush Color="#FF9500" Opacity="0.2"/>
+            </Border.Background>
+            <TextBlock Text="시스템" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </DataTemplate>
 
-    <!-- 탭 라디오버튼 템플릿 -->
+    <DataTemplate x:Key="UserCategoryTemplate">
+        <Border CornerRadius="5" Padding="10,2">
+            <Border.Background>
+                <SolidColorBrush Color="#FFCC00" Opacity="0.2"/>
+            </Border.Background>
+            <TextBlock Text="사용자" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="NetworkCategoryTemplate">
+        <Border CornerRadius="5" Padding="10,2">
+            <Border.Background>
+                <SolidColorBrush Color="#00C7BE" Opacity="0.2"/>
+            </Border.Background>
+            <TextBlock Text="네트워크" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SecurityCategoryTemplate">
+        <Border CornerRadius="5" Padding="10,2">
+            <Border.Background>
+                <SolidColorBrush Color="#A2845E" Opacity="0.2"/>
+            </Border.Background>
+            <TextBlock Text="보안" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </DataTemplate>
+
+    <!-- 탭 라디오버튼 템플릿 - 밑줄 길이 수정 -->
     <ControlTemplate x:Key="TabRadioButtonTemplate" TargetType="RadioButton">
-        <Grid>
-            <Border Background="Transparent" Padding="{TemplateBinding Padding}">
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Border>
-            <Border x:Name="UnderlineBorder" Background="{DynamicResource PrimaryBrush}" 
-                    Height="2" VerticalAlignment="Bottom" Opacity="0"/>
-        </Grid>
+        <StackPanel>
+            <!-- 콘텐츠 영역 -->
+            <ContentPresenter x:Name="PART_Content" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center"
+                              Margin="0,0,0,3"/>
+
+            <!-- 밑줄 영역 - 콘텐츠 길이에 맞춤 -->
+            <Border x:Name="UnderlineBorder" 
+                    Background="Black" 
+                    Height="2" 
+                    Opacity="0"
+                    Width="{Binding ActualWidth, ElementName=PART_Content}"/>
+        </StackPanel>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="SemiBold"/>
                 <Setter TargetName="UnderlineBorder" Property="Opacity" Value="1"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+                <Setter Property="Foreground" Value="Black"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!-- 심각도 아이콘을 위한 템플릿 -->
+    <!-- 기존 데이터 템플릿들 유지 (심각도 아이콘) -->
     <DataTemplate x:Key="ErrorIconTemplate">
         <Grid>
             <Ellipse Width="20" Height="20" Fill="{DynamicResource ErrorBrush}"/>

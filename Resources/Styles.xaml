@@ -2,33 +2,33 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- 버튼 스타일 -->
     <Style x:Key="PrimaryButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
         <Setter Property="Padding" Value="15,0"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Height" Value="{StaticResource ControlHeightRegular}"/>
-        <Setter Property="Template" Value="{StaticResource DefaultButtonTemplate}"/>
+        <Setter Property="Height" Value="{DynamicResource ControlHeightRegular}"/>
+        <Setter Property="Template" Value="{DynamicResource DefaultButtonTemplate}"/>
     </Style>
 
     <Style x:Key="OutlineButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
         <Setter Property="Padding" Value="15,0"/>
-        <Setter Property="Height" Value="{StaticResource ControlHeightRegular}"/>
-        <Setter Property="Template" Value="{StaticResource OutlineButtonTemplate}"/>
+        <Setter Property="Height" Value="{DynamicResource ControlHeightRegular}"/>
+        <Setter Property="Template" Value="{DynamicResource OutlineButtonTemplate}"/>
     </Style>
 
     <Style x:Key="IconButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="5"/>
-        <Setter Property="Width" Value="{StaticResource IconButtonSize}"/>
-        <Setter Property="Height" Value="{StaticResource IconButtonSize}"/>
-        <Setter Property="Template" Value="{StaticResource OutlineButtonTemplate}"/>
+        <Setter Property="Width" Value="{DynamicResource IconButtonSize}"/>
+        <Setter Property="Height" Value="{DynamicResource IconButtonSize}"/>
+        <Setter Property="Template" Value="{DynamicResource OutlineButtonTemplate}"/>
     </Style>
 
     <!-- 탭 버튼 스타일 (TopNavBar용) -->
@@ -36,70 +36,367 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="15,0"/>
-        <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
-        <Setter Property="Template" Value="{StaticResource TabRadioButtonTemplate}"/>
+        <Setter Property="Foreground" Value="#999999"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Template" Value="{DynamicResource TabRadioButtonTemplate}"/>
     </Style>
 
     <!-- DataGrid 스타일 -->
     <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
-        <Setter Property="Height" Value="{StaticResource DataGridRowHeight}"/>
+        <Setter Property="Height" Value="{DynamicResource DataGridRowHeight}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource HoverBackgroundBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource HoverBackgroundBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
+    <!-- DataGrid Header 스타일 - 가운데 정렬 추가 -->
     <Style x:Key="DataGridHeaderStyle" TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="{StaticResource HeaderBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource HeaderBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Height" Value="{StaticResource DataGridHeaderHeight}"/>
+        <Setter Property="Height" Value="{DynamicResource DataGridHeaderHeight}"/>
         <Setter Property="Padding" Value="10,0"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <!-- 헤더 콘텐츠 가운데 정렬 -->
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <!-- DatePicker 스타일 -->
-    <Style x:Key="CustomDatePickerStyle" TargetType="DatePicker">
-        <Setter Property="Height" Value="{StaticResource ControlHeightRegular}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
-    </Style>
-
-    <!-- ComboBox 스타일 -->
-    <Style x:Key="CustomComboBoxStyle" TargetType="ComboBox">
-        <Setter Property="Height" Value="{StaticResource ControlHeightLarge}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
+    <!-- TextBox 기본 스타일 - 모든 TextBox에 적용됨 -->
+    <Style TargetType="TextBox">
+        <Setter Property="Height" Value="{DynamicResource ControlHeightRegular}"/>
+        <Setter Property="BorderBrush" Value="#999999"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
+        <Setter Property="Padding" Value="10,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border" 
+                            CornerRadius="4" 
+                            Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True"
+                            UseLayoutRounding="True">
+                        <ScrollViewer x:Name="PART_ContentHost" 
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Background="{x:Null}" 
+                                      BorderThickness="0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#666666"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- 검색 TextBox 스타일 -->
-    <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-        <Setter Property="Height" Value="{StaticResource ControlHeightLarge}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
-        <Setter Property="Padding" Value="10,0"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Style x:Key="SearchBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Height" Value="{DynamicResource ControlHeightLarge}"/>
     </Style>
 
-    <!-- CheckBox 스타일 -->
-    <Style x:Key="CustomCheckBoxStyle" TargetType="CheckBox">
+    <!-- ComboBox 기본 스타일 - 모든 ComboBox에 적용됨 -->
+    <Style TargetType="ComboBox">
+        <Setter Property="Height" Value="{DynamicResource ControlHeightRegular}"/>
+        <Setter Property="BorderBrush" Value="#999999"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
+        <Setter Property="Padding" Value="5,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
-        <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton x:Name="toggleButton"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      Background="{TemplateBinding Background}"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      SnapsToDevicePixels="True">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border x:Name="border" 
+                                            CornerRadius="4" 
+                                            Background="{TemplateBinding Background}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}" 
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            SnapsToDevicePixels="True"
+                                            UseLayoutRounding="True">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0" 
+                                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                              Content="{TemplateBinding Content}" 
+                                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                              Margin="{TemplateBinding Padding}"/>
+                                            <Path Grid.Column="1" 
+                                                  Fill="#999999" 
+                                                  Margin="0,0,10,0"
+                                                  Data="M 0 0 L 8 0 L 4 4 Z" 
+                                                  Width="8" 
+                                                  Height="4" 
+                                                  VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="BorderBrush" Value="#666666"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                            <StackPanel>
+                                <ContentPresenter ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </StackPanel>
+                        </ToggleButton>
+                        <Popup x:Name="PART_Popup"
+                               AllowsTransparency="True"
+                               Grid.ColumnSpan="2"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               PopupAnimation="Slide"
+                               Placement="Bottom">
+                            <Border x:Name="dropDownBorder"
+                                    MinWidth="{Binding ActualWidth, ElementName=toggleButton}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                    Background="White"
+                                    BorderBrush="#999999"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    SnapsToDevicePixels="True">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
-    <!-- RadioButton 스타일 -->
-    <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton">
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
-        <Setter Property="Margin" Value="0,0,0,10"/>
+    <!-- 사용자 정의 ComboBox 스타일 -->
+    <Style x:Key="CustomComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="Height" Value="{DynamicResource ControlHeightLarge}"/>
     </Style>
+
+    <!-- DatePicker 기본 스타일 - 모든 DatePicker에 적용됨 -->
+    <Style TargetType="DatePicker">
+        <Setter Property="Height" Value="{DynamicResource ControlHeightRegular}"/>
+        <Setter Property="BorderBrush" Value="#999999"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
+        <Setter Property="Padding" Value="5,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="CalendarStyle">
+            <Setter.Value>
+                <Style TargetType="Calendar">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Calendar">
+                                <Border BorderThickness="1" BorderBrush="#999999" CornerRadius="4" Background="White">
+                                    <StackPanel>
+                                        <CalendarItem x:Name="PART_CalendarItem" 
+                                                      BorderBrush="{TemplateBinding BorderBrush}" 
+                                                      BorderThickness="{TemplateBinding BorderThickness}" 
+                                                      Background="{TemplateBinding Background}"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 사용자 정의 DatePicker 스타일 -->
+    <Style x:Key="CustomDatePickerStyle" TargetType="DatePicker" BasedOn="{StaticResource {x:Type DatePicker}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Border CornerRadius="4" 
+                            Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True"
+                            UseLayoutRounding="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <DatePickerTextBox x:Name="PART_TextBox" 
+                                              Grid.Column="0" 
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Background="{TemplateBinding Background}"
+                                              BorderThickness="0"
+                                              Padding="{TemplateBinding Padding}"/>
+                            <Button x:Name="PART_Button"
+                                  Grid.Column="1"
+                                  Margin="3,0,3,0"
+                                  Width="20"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  Focusable="False">
+                                <Path Fill="#999999" 
+                                     Data="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#666666"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- CheckBox 기본 스타일 - 모든 CheckBox에 적용됨 -->
+    <Style TargetType="CheckBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="checkBoxBorder" 
+                               Grid.Column="0" 
+                               Width="16" 
+                               Height="16" 
+                               CornerRadius="4" 
+                               Background="White" 
+                               BorderThickness="1" 
+                               BorderBrush="#999999" 
+                               VerticalAlignment="Center"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True">
+                            <Path x:Name="checkMark" 
+                                 Fill="{DynamicResource PrimaryBrush}" 
+                                 Data="M2,6L3.5,7.5 6,5 7,6 3.5,9.5 1,7z" 
+                                 Stretch="Uniform" 
+                                 Width="10" 
+                                 Height="10" 
+                                 Visibility="Collapsed"/>
+                        </Border>
+                        <ContentPresenter Grid.Column="1" 
+                                         Margin="5,0,0,0" 
+                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                         RecognizesAccessKey="True"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="checkMark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="#666666"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 사용자 정의 CheckBox 스타일 -->
+    <Style x:Key="CustomCheckBoxStyle" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+    </Style>
+
+    <!-- RadioButton 기본 스타일 - 모든 RadioButton에 적용됨 -->
+    <Style TargetType="RadioButton">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="radioButtonBorder" 
+                               Grid.Column="0" 
+                               Width="16" 
+                               Height="16" 
+                               CornerRadius="8" 
+                               Background="White" 
+                               BorderThickness="1" 
+                               BorderBrush="#999999" 
+                               VerticalAlignment="Center"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True">
+                            <Ellipse x:Name="radioMark" 
+                                    Fill="{DynamicResource PrimaryBrush}" 
+                                    Width="8" 
+                                    Height="8" 
+                                    Visibility="Collapsed"/>
+                        </Border>
+                        <ContentPresenter Grid.Column="1" 
+                                         Margin="5,0,0,0" 
+                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                         RecognizesAccessKey="True"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="radioMark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="#666666"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 사용자 정의 RadioButton 스타일 -->
+    <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+    </Style>
+
+    <!-- 탭 라디오버튼 스타일은 기본 RadioButton 스타일을 상속받지 않도록 유지 -->
 
     <!-- TabControl 헤더 숨김 스타일 -->
     <Style x:Key="HiddenTabControlStyle" TargetType="TabControl">

@@ -10,6 +10,7 @@
     <Color x:Key="BackgroundColor">#FFFFFF</Color>
     <Color x:Key="TextPrimaryColor">#333333</Color>
     <Color x:Key="TextSecondaryColor">#666666</Color>
+    <Color x:Key="TextTertiaryColor">#999999</Color>
     <Color x:Key="HoverBackgroundColor">#F6F6F6</Color>
     <Color x:Key="HeaderBackgroundColor">#FAFAFA</Color>
 
@@ -23,6 +24,7 @@
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="TextTertiaryBrush" Color="{StaticResource TextTertiaryColor}"/>
     <SolidColorBrush x:Key="HoverBackgroundBrush" Color="{StaticResource HoverBackgroundColor}"/>
     <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="{StaticResource HeaderBackgroundColor}"/>
 </ResourceDictionary>

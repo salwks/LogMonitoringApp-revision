@@ -9,22 +9,22 @@
 
     <!-- 기본 텍스트 스타일 -->
     <Style x:Key="BodyText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="HeaderText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="TitleText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeXXLarge}"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
